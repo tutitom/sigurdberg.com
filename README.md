@@ -1,40 +1,91 @@
-<img src="/public/cover.jpg" alt="Cover image representing Nim, a personal website template" width="100%" />
+# Magic Portfolio
 
-Nim is a free and open-source personal website template built with Next.js 15, React 19, Tailwind CSS v4, and Motion. Designed for developers, designers, and founders, it combines minimalism with delightful animated components powered by [Motion-Primitives](https://motion-primitives.com).
+Magic Portfolio is a simple, clean, beginner-friendly portfolio template. It supports an MDX-based content system for projects and blog posts, an about / CV page and a gallery.
 
-Live demo: [https://nim-fawn.vercel.app](https://nim-fawn.vercel.app)
+View the demo [here](https://demo.magic-portfolio.com).
 
-## Features
+![Magic Portfolio](public/images/og/home.jpg)
 
-- Minimal one-page portfolio layout.
-- Blog support with MDX.
-- Responsive and accessible design.
-- Easy to use
-- [Motion-Primitives](https://motion-primitives.com) for animated components.
+## Getting started
 
-## Getting Started
+**1. Clone the repository**
+```
+git clone https://github.com/once-ui-system/magic-portfolio.git
+```
 
-For detailed setup instructions, refer to the [Installation Guide](./INSTALLATION.md).
-
-```bash
-git clone https://github.com/ibelick/nim.git
-cd nim
+**2. Install dependencies**
+```
 npm install
+```
+
+**3. Run dev server**
+```
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+**4. Edit config**
+```
+src/resources/once-ui.config.js
+```
 
-## Contributing
+**5. Edit content**
+```
+src/resources/content.js
+```
 
-Contributions are welcome! Feel free to open issues or submit pull requests to improve Nim.
+**6. Create blog posts / projects**
+```
+Add a new .mdx file to src/app/blog/posts or src/app/work/projects
+```
 
-## Deployment
+Magic Portfolio was built with [Once UI](https://once-ui.com) for [Next.js](https://nextjs.org). It requires Node.js v18.17+.
 
-You can deploy your site to any hosting platform that supports Next.js. For the easiest deployment experience, consider using Vercel:
+## Documentation
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fibelick%2Fnim&env=NEXT_PUBLIC_SITE_URL&project-name=nim&repository-name=nim&redirect-url=https%3A%2F%2Ftwitter.com%2Fibelick&demo-title=Nim&demo-description=Nim%20is%20a%20free%20and%20open-source%20minimal%20personal%20website%20template%20built%20with%20Next.js%2015%2C%20React%2019%2C%20and%20Motion-Primitives.&demo-url=https%3A%2F%2Fnim.vercel.app&demo-image=https%3A%2F%2Fraw.githubusercontent.com%2Fibelick%2Fnim%2Frefs%2Fheads%2Fmain%2F.github%2Fassets%2Freadme.png&teamSlug=ibelick)
+Docs available at: [docs.once-ui.com](https://docs.once-ui.com/docs/magic-portfolio/quick-start)
 
-## About
+## Features
 
-Nim is designed to make personal branding effortless and beautiful. If you enjoy it, consider sharing it and exploring [Motion-Primitives Pro](https://pro.motion-primitives.com/).
+### Once UI
+- All tokens, components & features of [Once UI](https://once-ui.com)
+
+### SEO
+- Automatic open-graph and X image generation with next/og
+- Automatic schema and metadata generation based on the content file
+
+### Design
+- Responsive layout optimized for all screen sizes
+- Timeless design without heavy animations and motion
+- Endless customization options through [data attributes](https://once-ui.com/docs/theming)
+
+### Content
+- Render sections conditionally based on the content file
+- Enable or disable pages for blog, work, gallery and about / CV
+- Generate and display social links automatically
+- Set up password protection for URLs
+
+### Localization
+- A localized, earlier version of Magic Portfolio is available with the next-intl library
+- To use localization, switch to the 'i18n' branch
+
+## Creators
+
+Lorant One: [Threads](https://www.threads.net/@lorant.one) / [LinkedIn](https://www.linkedin.com/in/lorant-one/)
+
+## Get involved
+
+- Join the Design Engineers Club on [Discord](https://discord.com/invite/5EyAQ4eNdS) and share your project with us!
+- Deployed your docs? Share it on the [Once UI Hub](https://once-ui.com/hub) too! We feature our favorite apps on our landing page.
+
+## License
+
+Distributed under the CC BY-NC 4.0 License.
+- Attribution is required.
+- Commercial usage is not allowed.
+- You can extend the license to [Dopler CC](https://dopler.app/license) by purchasing a [Once UI Pro](https://once-ui.com/pricing) license.
+
+See `LICENSE.txt` for more information.
+
+## Deploy with Vercel
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fonce-ui-system%2Fmagic-portfolio&project-name=portfolio&repository-name=portfolio&redirect-url=https%3A%2F%2Fgithub.com%2Fonce-ui-system%2Fmagic-portfolio&demo-title=Magic%20Portfolio&demo-description=Showcase%20your%20designers%20or%20developer%20portfolio&demo-url=https%3A%2F%2Fdemo.magic-portfolio.com&demo-image=%2F%2Fraw.githubusercontent.com%2Fonce-ui-system%2Fmagic-portfolio%2Fmain%2Fpublic%2Fimages%2Fog%2Fhome.jpg)
