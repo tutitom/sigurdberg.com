@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sigurd Berg</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;1,400&family=DM+Sans:wght@300;400&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:     #f9f8f6;
+      --text:   #1a1a1a;
+      --muted:  #888;
+      --light:  #d4d0c8;
+      --serif:  'Lora', Georgia, serif;
+      --sans:   'DM Sans', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      font-weight: 300;
+      font-size: 15px;
+      line-height: 1.75;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .wrap {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* ── Header ── */
+    header {
+      padding: 5rem 0 4rem;
+      opacity: 0;
+      animation: appear 0.5s ease forwards 0.05s;
+    }
+
+    .site-name {
+      font-family: var(--serif);
+      font-size: 1.5rem;
+      font-weight: 400;
+      letter-spacing: -0.01em;
+      margin-bottom: 0.3rem;
+    }
+
+    .site-sub {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 0.6rem;
+    }
+
+    .contact-line {
+      font-size: 12px;
+      color: var(--muted);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.3rem 1.5rem;
+    }
+
+    .contact-line a {
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    .contact-line a:hover { color: var(--text); }
+
+    nav {
+      display: flex;
+      gap: 2rem;
+      margin-top: 2.5rem;
+      opacity: 0;
+      animation: appear 0.5s ease forwards 0.15s;
+    }
+
+    nav a {
+      font-size: 13px;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    nav a:hover { color: var(--text); }
+
+    /* ── Sections ── */
+    section {
+      padding: 3.5rem 0;
+      border-top: 1px solid var(--light);
+    }
+
+    .section-title {
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 2rem;
+    }
+
+    /* ── About ── */
+    #about p {
+      color: #444;
+      margin-bottom: 0.85rem;
+    }
+    #about p:last-child { margin-bottom: 0; }
+
+    /* ── Rows (experience / education) ── */
+    .rows { display: flex; flex-direction: column; }
+
+    .row {
+      display: grid;
+      grid-template-columns: 110px 1fr;
+      gap: 1.5rem;
+      padding: 1.5rem 0;
+      border-bottom: 1px solid var(--light);
+    }
+    .row:first-child { border-top: 1px solid var(--light); }
+
+    .row-year {
+      font-size: 12px;
+      color: var(--muted);
+      padding-top: 0.1rem;
+      line-height: 1.5;
+    }
+
+    .row-body h3 {
+      font-family: var(--serif);
+      font-size: 1rem;
+      font-weight: 400;
+      font-style: italic;
+      margin-bottom: 0.05rem;
+    }
+
+    .row-body .place {
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 0.4rem;
+    }
+
+    .row-body p {
+      font-size: 13px;
+      color: #555;
+    }
+
+    /* ── Skills ── */
+    .skill-rows { display: flex; flex-direction: column; }
+
+    .skill-row {
+      display: grid;
+      grid-template-columns: 110px 1fr;
+      gap: 1.5rem;
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--light);
+      font-size: 13px;
+    }
+    .skill-row:first-child { border-top: 1px solid var(--light); }
+
+    .skill-label { color: var(--muted); }
+    .skill-list  { color: #444; }
+
+    /* ── Contact ── */
+    #contact p {
+      color: #444;
+      margin-bottom: 1.5rem;
+    }
+
+    .links { display: flex; flex-direction: column; }
+
+    .link-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.9rem 0;
+      border-bottom: 1px solid var(--light);
+      text-decoration: none;
+      color: var(--text);
+      font-size: 14px;
+      transition: color 0.15s;
+    }
+    .link-row:first-child { border-top: 1px solid var(--light); }
+    .link-row:hover { color: var(--muted); }
+
+    .link-arrow { font-size: 12px; color: var(--muted); }
+
+    /* ── Footer ── */
+    footer {
+      border-top: 1px solid var(--light);
+      padding: 2rem 0 4rem;
+      font-size: 12px;
+      color: var(--muted);
+      display: flex;
+      justify-content: space-between;
+    }
+
+    /* ── Animations ── */
+    @keyframes appear {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .fade {
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .fade.in { opacity: 1; transform: none; }
+
+    @media (max-width: 500px) {
+      .row, .skill-row { grid-template-columns: 1fr; gap: 0.25rem; }
+      footer { flex-direction: column; gap: 0.25rem; }
+    }
+  </style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="site-name">Sigurd Berg</div>
+    <div class="site-sub">Information Technology Student · Norway</div>
+    <div class="contact-line">
+      <a href="mailto:sigurd@sigurdberg.com">sigurd@sigurdberg.com</a>
+      <span>(+47) 469 54 915</span>
+      <a href="https://linkedin.com/in/sigurdberg/" target="_blank" rel="noopener">linkedin.com/in/sigurdberg</a>
+    </div>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#experience">Experience</a>
+      <a href="#education">Education</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <section id="about" class="fade">
+    <div class="section-title">About</div>
+    <p>
+      I'm an information technology student at the University of Bergen, working
+      towards a bachelor's in Informatics: Computer Science. My studies focus on
+      programming, software development, databases, and data analysis.
+    </p>
+  </section>
+
+  <section id="experience" class="fade">
+    <div class="section-title">Experience</div>
+    <div class="rows">
+
+      <div class="row">
+        <span class="row-year">Jun – Aug 2026</span>
+        <div class="row-body">
+          <h3>Summer Intern</h3>
+          <div class="place">Kongsberg Discovery · Horten, Norway</div>
+          <p>Summer internship: Coastal Monitoring project.</p>
+        </div>
+      </div>
+
+      <div class="row">
+        <span class="row-year">Aug 2025 – Present</span>
+        <div class="row-body">
+          <h3>Student Assistant</h3>
+          <div class="place">University of Bergen · Bergen, Norway</div>
+          <p>Assisted students with programming assignments and coursework, providing guidance in problem-solving and debugging. Supported lecturers during lab sessions and helped maintain a productive learning environment.</p>
+        </div>
+      </div>
+
+      <div class="row">
+        <span class="row-year">Jun – Aug 2025</span>
+        <div class="row-body">
+          <h3>Summer Intern</h3>
+          <div class="place">Kongsberg Discovery · Horten, Norway</div>
+          <p>Manufacturing and assembly operator at Kongsberg Discovery.</p>
+        </div>
+      </div>
+
+      <div class="row">
+        <span class="row-year">Apr 2021 – Jun 2025</span>
+        <div class="row-body">
+          <h3>Grocery Stocker</h3>
+          <div class="place">Meny Tolvsrød · Tønsberg, Norway</div>
+          <p>Responsibilities included closing the store, daytime store management, goods delivery by car, e-commerce, customer service, and stocking. Held during high school and a gap year.</p>
+        </div>
+      </div>
+
+      <div class="row">
+        <span class="row-year">Apr 2023 – Apr 2024</span>
+        <div class="row-body">
+          <h3>Mandatory Military Service</h3>
+          <div class="place">Norwegian Navy · Bergen, Norway</div>
+          <p>Served at Haakonsvern as a fire protection soldier. Main duties included smoke diving and providing medical assistance during incidents.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="education" class="fade">
+    <div class="section-title">Education</div>
+    <div class="rows">
+
+      <div class="row">
+        <span class="row-year">Aug 2024 – Ongoing</span>
+        <div class="row-body">
+          <h3>B.Sc. Informatics: Data Technology</h3>
+          <div class="place">University of Bergen</div>
+          <p>Programming, software development, databases, and data analysis, with a focus on designing and implementing technological solutions for real-world problems.</p>
+        </div>
+      </div>
+
+  </section>
+
+  <section id="skills" class="fade">
+    <div class="section-title">Skills</div>
+    <div class="skill-rows">
+      <div class="skill-row">
+        <span class="skill-label">Programming</span>
+        <span class="skill-list">Python, Java, C</span>
+      </div>
+      <div class="skill-row">
+        <span class="skill-label">Tools</span>
+        <span class="skill-list">Excel, Soldering</span>
+      </div>
+      <div class="skill-row">
+        <span class="skill-label">Languages</span>
+        <span class="skill-list">Norwegian (native), English (fluent)</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="fade">
+    <div class="section-title">Contact</div>
+    <div class="links">
+      <a href="mailto:sigurd@sigurdberg.com" class="link-row">
+        <span>sigurd@sigurdberg.com</span>
+        <span class="link-arrow">↗</span>
+      </a>
+      <a href="https://linkedin.com/in/sigurdberg/" class="link-row" target="_blank" rel="noopener">
+        <span>linkedin.com/in/sigurdberg</span>
+        <span class="link-arrow">↗</span>
+      </a>
+      <a href="tel:+4746954915" class="link-row">
+        <span>(+47) 469 54 915</span>
+        <span class="link-arrow">↗</span>
+      </a>
+    </div>
+  </section>
+
+  <footer>
+    <span>Sigurd Berg · Norway</span>
+    <span>2026</span>
+  </footer>
+
+</div>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.08 });
+
+  document.querySelectorAll('.fade').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
