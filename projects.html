@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Projects — Sigurd Berg</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="icon" href="/favicon.ico" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;1,400&family=DM+Sans:wght@300;400&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:     #f9f8f6;
+      --text:   #1a1a1a;
+      --muted:  #999;
+      --light:  #e2dfd8;
+      --serif:  'Lora', Georgia, serif;
+      --sans:   'DM Sans', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      font-weight: 300;
+      font-size: 15px;
+      line-height: 1.75;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .wrap {
+      max-width: 620px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* ── Header ── */
+    header {
+      padding: 5rem 0 3.5rem;
+      opacity: 0;
+      animation: appear 0.5s ease forwards 0.05s;
+    }
+
+    .back {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 12px;
+      color: var(--muted);
+      text-decoration: none;
+      margin-bottom: 2.5rem;
+      transition: color 0.15s;
+    }
+    .back:hover { color: var(--text); }
+
+    .page-title {
+      font-family: var(--serif);
+      font-size: 1.5rem;
+      font-weight: 400;
+      letter-spacing: -0.01em;
+      margin-bottom: 0.3rem;
+    }
+
+    .page-sub {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    /* ── Divider ── */
+    .divider {
+      border: none;
+      border-top: 1px solid var(--light);
+      margin: 0;
+    }
+
+    /* ── Project list ── */
+    .projects { display: flex; flex-direction: column; margin: 3rem 0; gap: 0; }
+
+    .project {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 2rem;
+      padding: 2rem 0;
+      border-bottom: 1px solid var(--light);
+      text-decoration: none;
+      color: var(--text);
+      transition: opacity 0.15s;
+    }
+    .project:first-child { border-top: 1px solid var(--light); }
+    .project:hover { opacity: 0.6; }
+
+    /* Non-linked project (no external URL yet) */
+    .project.no-link { cursor: default; }
+    .project.no-link:hover { opacity: 1; }
+
+    .project-left { flex: 1; }
+
+    .project-title {
+      font-family: var(--serif);
+      font-size: 1.05rem;
+      font-weight: 400;
+      font-style: italic;
+      margin-bottom: 0.3rem;
+    }
+
+    .project-desc {
+      font-size: 13px;
+      color: #555;
+      margin-bottom: 0.55rem;
+    }
+
+    .project-stack {
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+    }
+
+    .project-arrow {
+      font-size: 13px;
+      color: var(--muted);
+      flex-shrink: 0;
+      padding-top: 0.15rem;
+    }
+
+    /* ── Footer ── */
+    footer {
+      border-top: 1px solid var(--light);
+      padding: 2rem 0 4rem;
+      font-size: 12px;
+      color: var(--muted);
+      display: flex;
+      justify-content: space-between;
+    }
+
+    /* ── Animations ── */
+    @keyframes appear {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .fade {
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .fade.in { opacity: 1; transform: none; }
+
+    @media (max-width: 500px) {
+      footer { flex-direction: column; gap: 0.25rem; }
+    }
+  </style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <a href="index.html" class="back">← Sigurd Berg</a>
+    <div class="page-title">Projects</div>
+    <div class="page-sub">A selection of things I've built.</div>
+  </header>
+
+  <hr class="divider" />
+
+  <div class="projects fade">
+
+    <!-- Link to GitHub or live URL. If none yet, use class="project no-link" and remove the href -->
+    <a href="https://github.com/yourusername/tower-defense" class="project" target="_blank" rel="noopener">
+      <div class="project-left">
+        <div class="project-title">Tower Defense Game</div>
+        <p class="project-desc">
+          A Java game built with LibGDX for INF112. Features a card-based upgrade system,
+          enemy waves, projectile physics, and JSON-driven configuration.
+        </p>
+        <div class="project-stack">Java · LibGDX · JUnit 5 · Gson · Gradle</div>
+      </div>
+      <span class="project-arrow">↗</span>
+    </a>
+
+    <a href="https://github.com/yourusername/bike-share" class="project" target="_blank" rel="noopener">
+      <div class="project-left">
+        <div class="project-title">Bike-Share Data Explorer</div>
+        <p class="project-desc">
+          Python Shiny web app connected to a SQLite bike-sharing database,
+          with reactive queries and interactive visualisations.
+        </p>
+        <div class="project-stack">Python · Shiny · SQLite · SQL</div>
+      </div>
+      <span class="project-arrow">↗</span>
+    </a>
+
+    <a href="https://github.com/yourusername/wordle-solver" class="project" target="_blank" rel="noopener">
+      <div class="project-left">
+        <div class="project-title">Wordle AI Solver</div>
+        <p class="project-desc">
+          Entropy-based solver for INF102. Picks the optimal guess at each step
+          using information theory to minimise remaining candidates.
+        </p>
+        <div class="project-stack">Python · Algorithms · Information Theory</div>
+      </div>
+      <span class="project-arrow">↗</span>
+    </a>
+
+    <a href="https://github.com/yourusername/zerow" class="project" target="_blank" rel="noopener">
+      <div class="project-left">
+        <div class="project-title">Zerow Language</div>
+        <p class="project-desc">
+          A custom programming language for INF222 — grammar, semantic validation,
+          and a WebAssembly code generator, all in TypeScript with Langium.
+        </p>
+        <div class="project-stack">TypeScript · Langium · WebAssembly</div>
+      </div>
+      <span class="project-arrow">↗</span>
+    </a>
+
+  </div>
+
+  <footer>
+    <span>Sigurd Berg · Norway</span>
+    <span>2026</span>
+  </footer>
+
+</div>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('in'); observer.unobserve(e.target); }
+    });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.fade').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

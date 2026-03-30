@@ -15,8 +15,8 @@
     :root {
       --bg:     #f9f8f6;
       --text:   #1a1a1a;
-      --muted:  #888;
-      --light:  #d4d0c8;
+      --muted:  #999;
+      --light:  #e2dfd8;
       --serif:  'Lora', Georgia, serif;
       --sans:   'DM Sans', sans-serif;
     }
@@ -34,7 +34,7 @@
     }
 
     .wrap {
-      max-width: 640px;
+      max-width: 620px;
       margin: 0 auto;
       padding: 0 2rem;
     }
@@ -57,7 +57,7 @@
     .site-sub {
       font-size: 13px;
       color: var(--muted);
-      margin-bottom: 0.6rem;
+      margin-bottom: 0.55rem;
     }
 
     .contact-line {
@@ -92,37 +92,31 @@
     nav a:hover { color: var(--text); }
 
     /* ── Sections ── */
-    section {
-      padding: 3.5rem 0;
-      border-top: 1px solid var(--light);
-    }
+    section { padding: 3rem 0; }
 
     .section-title {
       font-size: 11px;
       letter-spacing: 0.12em;
       text-transform: uppercase;
       color: var(--muted);
-      margin-bottom: 2rem;
+      margin-bottom: 1.75rem;
     }
 
     /* ── About ── */
     #about p {
       color: #444;
-      margin-bottom: 0.85rem;
+      margin-bottom: 0.75rem;
     }
     #about p:last-child { margin-bottom: 0; }
 
-    /* ── Rows (experience / education) ── */
-    .rows { display: flex; flex-direction: column; }
+    /* ── Rows — no top border, only a bottom border on last item ── */
+    .rows { display: flex; flex-direction: column; gap: 1.75rem; }
 
     .row {
       display: grid;
       grid-template-columns: 110px 1fr;
       gap: 1.5rem;
-      padding: 1.5rem 0;
-      border-bottom: 1px solid var(--light);
     }
-    .row:first-child { border-top: 1px solid var(--light); }
 
     .row-year {
       font-size: 12px;
@@ -142,7 +136,7 @@
     .row-body .place {
       font-size: 12px;
       color: var(--muted);
-      margin-bottom: 0.4rem;
+      margin-bottom: 0.35rem;
     }
 
     .row-body p {
@@ -150,45 +144,60 @@
       color: #555;
     }
 
+    /* ── Section divider — only between sections ── */
+    .divider {
+      border: none;
+      border-top: 1px solid var(--light);
+      margin: 0;
+    }
+
     /* ── Skills ── */
-    .skill-rows { display: flex; flex-direction: column; }
+    .skill-rows { display: flex; flex-direction: column; gap: 0.6rem; }
 
     .skill-row {
       display: grid;
       grid-template-columns: 110px 1fr;
       gap: 1.5rem;
-      padding: 1rem 0;
-      border-bottom: 1px solid var(--light);
       font-size: 13px;
     }
-    .skill-row:first-child { border-top: 1px solid var(--light); }
 
     .skill-label { color: var(--muted); }
     .skill-list  { color: #444; }
 
-    /* ── Contact ── */
-    #contact p {
-      color: #444;
-      margin-bottom: 1.5rem;
+    /* ── Projects teaser ── */
+    .projects-teaser {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.25rem 0;
+      text-decoration: none;
+      color: var(--text);
+      border-top: 1px solid var(--light);
+      border-bottom: 1px solid var(--light);
+      transition: color 0.15s;
     }
+    .projects-teaser:hover { color: var(--muted); }
 
-    .links { display: flex; flex-direction: column; }
+    .projects-teaser-left { display: flex; flex-direction: column; gap: 0.15rem; }
+    .projects-teaser-title { font-family: var(--serif); font-size: 1rem; font-style: italic; }
+    .projects-teaser-sub   { font-size: 12px; color: var(--muted); }
+    .projects-teaser-arrow { font-size: 13px; color: var(--muted); }
+
+    /* ── Contact ── */
+    .links { display: flex; flex-direction: column; gap: 0.5rem; }
 
     .link-row {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 0.9rem 0;
-      border-bottom: 1px solid var(--light);
       text-decoration: none;
-      color: var(--text);
-      font-size: 14px;
+      color: #444;
+      font-size: 13px;
       transition: color 0.15s;
     }
-    .link-row:first-child { border-top: 1px solid var(--light); }
-    .link-row:hover { color: var(--muted); }
+    .link-row:hover { color: var(--text); }
 
-    .link-arrow { font-size: 12px; color: var(--muted); }
+    .link-arrow { font-size: 11px; color: var(--muted); }
 
     /* ── Footer ── */
     footer {
@@ -198,6 +207,7 @@
       color: var(--muted);
       display: flex;
       justify-content: space-between;
+      margin-top: 1rem;
     }
 
     /* ── Animations ── */
@@ -214,7 +224,7 @@
     .fade.in { opacity: 1; transform: none; }
 
     @media (max-width: 500px) {
-      .row, .skill-row { grid-template-columns: 1fr; gap: 0.25rem; }
+      .row, .skill-row { grid-template-columns: 1fr; gap: 0.2rem; }
       footer { flex-direction: column; gap: 0.25rem; }
     }
   </style>
@@ -235,9 +245,12 @@
       <a href="#experience">Experience</a>
       <a href="#education">Education</a>
       <a href="#skills">Skills</a>
+      <a href="projects.html">Projects</a>
       <a href="#contact">Contact</a>
     </nav>
   </header>
+
+  <hr class="divider" />
 
   <section id="about" class="fade">
     <div class="section-title">About</div>
@@ -246,73 +259,94 @@
       towards a bachelor's in Informatics: Computer Science. My studies focus on
       programming, software development, databases, and data analysis.
     </p>
+    <p>
+      Outside of university I have a big passion for listening and playing music.
+      I stay active through different sports and play handball with a student team in Bergen.
+      During my gap year I spent six months travelling — both alone and with friends.
+    </p>
   </section>
+
+  <hr class="divider" />
 
   <section id="experience" class="fade">
     <div class="section-title">Experience</div>
     <div class="rows">
 
       <div class="row">
-        <span class="row-year">June 26 – August 2026</span>
+        <span class="row-year">Jun – Aug 2026</span>
         <div class="row-body">
           <h3>Summer Intern</h3>
-          <div class="place">Kongsberg Discovery · Horten, Norway</div>
-          <p>Summer internship: Coastal Monitoring project.</p>
+          <div class="place">Kongsberg Discovery · Horten</div>
+          <p>Coastal Monitoring project.</p>
         </div>
       </div>
 
       <div class="row">
-        <span class="row-year">August 2025 – Present</span>
+        <span class="row-year">Aug 2025 – Present</span>
         <div class="row-body">
           <h3>Student Assistant</h3>
-          <div class="place">University of Bergen · Bergen, Norway</div>
-          <p>Assisted students with programming assignments and coursework, providing guidance in problem-solving and debugging. Supported lecturers during lab sessions and helped maintain a productive learning environment.</p>
+          <div class="place">University of Bergen · Bergen</div>
+          <p>Assisted students with programming assignments, problem-solving, and debugging. Supported lecturers during lab sessions.</p>
         </div>
       </div>
 
       <div class="row">
-        <span class="row-year">June 2025 – August 2025</span>
+        <span class="row-year">Jun – Aug 2025</span>
         <div class="row-body">
           <h3>Summer Intern</h3>
-          <div class="place">Kongsberg Discovery · Horten, Norway</div>
-          <p>Manufacturing and assembly operator at Kongsberg Discovery.</p>
+          <div class="place">Kongsberg Discovery · Horten</div>
+          <p>Manufacturing and assembly operator.</p>
         </div>
       </div>
 
       <div class="row">
-        <span class="row-year">April 2021 – June 2025</span>
+        <span class="row-year">Apr 2021 – Jun 2025</span>
         <div class="row-body">
           <h3>Grocery Stocker</h3>
-          <div class="place">Meny Tolvsrød · Tønsberg, Norway</div>
-          <p>Responsibilities included closing the store, daytime store management, goods delivery by car, e-commerce, customer service, and stocking. Held during high school and a gap year.</p>
+          <div class="place">Meny Tolvsrød · Tønsberg</div>
+          <p>Store management, goods delivery, e-commerce, customer service, and stocking. Held during high school and a gap year.</p>
         </div>
       </div>
 
       <div class="row">
-        <span class="row-year">April 2023 – April 2024</span>
+        <span class="row-year">Apr 2023 – Apr 2024</span>
         <div class="row-body">
           <h3>Mandatory Military Service</h3>
-          <div class="place">Norwegian Navy · Bergen, Norway</div>
-          <p>Served at Haakonsvern as a fire protection soldier. Main duties included smoke diving and providing medical assistance during incidents.</p>
+          <div class="place">Norwegian Navy · Bergen</div>
+          <p>Fire protection soldier at Haakonsvern. Smoke diver and medical assistance.</p>
         </div>
       </div>
 
     </div>
   </section>
 
+  <hr class="divider" />
+
   <section id="education" class="fade">
     <div class="section-title">Education</div>
     <div class="rows">
 
       <div class="row">
-        <span class="row-year">August 2024 – June 2027</span>
+        <span class="row-year">2024 – 2027</span>
         <div class="row-body">
           <h3>B.Sc. Informatics: Computer Science</h3>
           <div class="place">University of Bergen</div>
         </div>
       </div>
 
+      <div class="row">
+        <span class="row-year">2019 – 2022</span>
+        <div class="row-body">
+          <h3>University Admissions Certification</h3>
+          <div class="place">Greveskogen High School</div>
+          <p>Mathematics, physics, and information technology.</p>
+        </div>
+      </div>
+
+    </div>
   </section>
+
+  <hr class="divider" />
 
   <section id="skills" class="fade">
     <div class="section-title">Skills</div>
@@ -331,6 +365,21 @@
       </div>
     </div>
   </section>
+
+  <hr class="divider" />
+
+  <section class="fade">
+    <div class="section-title">Projects</div>
+    <a href="projects.html" class="projects-teaser">
+      <div class="projects-teaser-left">
+        <span class="projects-teaser-title">Selected work</span>
+        <span class="projects-teaser-sub">Tower defense, bike-share explorer, Wordle solver & more</span>
+      </div>
+      <span class="projects-teaser-arrow">→</span>
+    </a>
+  </section>
+
+  <hr class="divider" />
 
   <section id="contact" class="fade">
     <div class="section-title">Contact</div>
@@ -360,13 +409,9 @@
 <script>
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add('in');
-        observer.unobserve(e.target);
-      }
+      if (e.isIntersecting) { e.target.classList.add('in'); observer.unobserve(e.target); }
     });
   }, { threshold: 0.08 });
-
   document.querySelectorAll('.fade').forEach(el => observer.observe(el));
 </script>
 </body>
