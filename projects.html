@@ -95,7 +95,18 @@
     .project:first-child { border-top: 1px solid var(--light); }
     .project:hover { opacity: 0.6; }
 
-    /* Non-linked project (no external URL yet) */
+    /* Clickable div project */
+    .project-btn {
+      cursor: pointer;
+      background: none;
+      border: none;
+      width: 100%;
+      text-align: left;
+      font: inherit;
+      color: inherit;
+    }
+
+    /* Non-linked project */
     .project.no-link { cursor: default; }
     .project.no-link:hover { opacity: 1; }
 
@@ -128,6 +139,93 @@
       padding-top: 0.15rem;
     }
 
+    /* ── Winner badge ── */
+    .winner-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-size: 10px;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: #7a5c20;
+      background: #faf2de;
+      border: 1px solid #dfc980;
+      border-radius: 3px;
+      padding: 0.15rem 0.5rem;
+      margin-bottom: 0.5rem;
+      font-family: var(--sans);
+      font-weight: 400;
+    }
+
+    /* ── Modal ── */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(20, 18, 14, 0.75);
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
+      z-index: 100;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+    .modal-overlay.open {
+      display: flex;
+      animation: fadeOverlay 0.2s ease forwards;
+    }
+
+    .modal {
+      background: var(--bg);
+      border-radius: 6px;
+      width: 100%;
+      max-width: 900px;
+      box-shadow: 0 32px 80px rgba(0,0,0,0.35);
+      overflow: hidden;
+      animation: slideUp 0.25s ease forwards;
+    }
+
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 1.4rem;
+      border-bottom: 1px solid var(--light);
+    }
+
+    .modal-title {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 0.95rem;
+    }
+
+    .modal-close {
+      background: none;
+      border: none;
+      font-size: 1.1rem;
+      color: var(--muted);
+      cursor: pointer;
+      line-height: 1;
+      padding: 0.25rem 0.5rem;
+      border-radius: 3px;
+      transition: color 0.15s, background 0.15s;
+    }
+    .modal-close:hover { color: var(--text); background: var(--light); }
+
+    .modal-embed {
+      position: relative;
+      width: 100%;
+      height: 0;
+      padding-top: 56.25%;
+    }
+
+    .modal-embed iframe {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      border: none;
+    }
+
     /* ── Footer ── */
     footer {
       border-top: 1px solid var(--light);
@@ -144,6 +242,16 @@
       to   { opacity: 1; transform: translateY(0); }
     }
 
+    @keyframes fadeOverlay {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
     .fade {
       opacity: 0;
       transform: translateY(8px);
@@ -153,6 +261,7 @@
 
     @media (max-width: 500px) {
       footer { flex-direction: column; gap: 0.25rem; }
+      .modal-overlay { padding: 0.75rem; }
     }
   </style>
 </head>
@@ -162,14 +271,27 @@
   <header>
     <a href="index.html" class="back">← Sigurd Berg</a>
     <div class="page-title">Projects</div>
-    <div class="page-sub">A selection of things I've built.</div>
+    <div class="page-sub">A selection of things I've built as part of studies and on my spare time.</div>
   </header>
 
   <hr class="divider" />
 
   <div class="projects fade">
 
-    <!-- Link to GitHub or live URL. If none yet, use class="project no-link" and remove the href -->
+    <!-- Bekk: Labyriten -->
+    <div class="project" style="cursor:pointer;" onclick="openModal()">
+      <div class="project-left">
+        <div class="winner-badge">🏆 Winner</div>
+        <div class="project-title">Bekk: Labyriten Finale 2026</div>
+        <p class="project-desc">
+          A student competition where the task was to design a concept for increasing
+          interactions between users and the feed in the VG X app.
+        </p>
+        <div class="project-stack">Concept Design · UX · Product Strategy</div>
+      </div>
+      <span class="project-arrow">↗</span>
+    </div>
+
     <a href="https://github.com/yourusername/tower-defense" class="project" target="_blank" rel="noopener">
       <div class="project-left">
         <div class="project-title">Tower Defense Game</div>
@@ -227,7 +349,50 @@
 
 </div>
 
+<!-- Presentation Modal -->
+<div class="modal-overlay" id="modal" onclick="handleOverlayClick(event)">
+  <div class="modal" id="modal-box">
+    <div class="modal-header">
+      <span class="modal-title">Bekk: Labyriten Finale 2026</span>
+      <button class="modal-close" onclick="closeModal()" aria-label="Close">✕</button>
+    </div>
+    <div class="modal-embed">
+      <iframe
+        id="canva-embed"
+        src=""
+        allowfullscreen="allowfullscreen"
+        allow="fullscreen"
+        loading="lazy"
+      ></iframe>
+    </div>
+  </div>
+</div>
+
 <script>
+  const EMBED_SRC = "https://www.canva.com/design/DAHHZvQ8RM4/VNUK-ttSLjbN0VndftKaow/view?embed";
+
+  function openModal() {
+    const iframe = document.getElementById('canva-embed');
+    iframe.src = EMBED_SRC;
+    document.getElementById('modal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    document.getElementById('modal').classList.remove('open');
+    document.getElementById('canva-embed').src = '';
+    document.body.style.overflow = '';
+  }
+
+  function handleOverlayClick(e) {
+    if (e.target === document.getElementById('modal')) closeModal();
+  }
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeModal();
+  });
+
+  // Scroll fade-in
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(e => {
       if (e.isIntersecting) { e.target.classList.add('in'); observer.unobserve(e.target); }
