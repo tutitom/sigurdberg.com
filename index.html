@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sigurd Berg</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="icon" href="/favicon.ico" />
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;1,400&family=DM+Sans:wght@300;400&display=swap" rel="stylesheet" />
 
@@ -109,7 +109,7 @@
     }
     #about p:last-child { margin-bottom: 0; }
 
-    /* ── Rows — no top border, only a bottom border on last item ── */
+    /* ── Rows ── */
     .rows { display: flex; flex-direction: column; gap: 1.75rem; }
 
     .row {
@@ -137,6 +137,21 @@
       font-size: 12px;
       color: var(--muted);
       margin-bottom: 0.35rem;
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+    }
+
+    /* ── Company logo ── */
+    .org-logo {
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      object-fit: contain;
+      border-radius: 3px;
+      opacity: 0.7;
+      vertical-align: middle;
+      flex-shrink: 0;
     }
 
     .row-body p {
@@ -144,7 +159,7 @@
       color: #555;
     }
 
-    /* ── Section divider — only between sections ── */
+    /* ── Section divider ── */
     .divider {
       border: none;
       border-top: 1px solid var(--light);
@@ -245,7 +260,7 @@
       <a href="#experience">Experience</a>
       <a href="#education">Education</a>
       <a href="#skills">Skills</a>
-      <a href="projects.html">Projects</a>
+      <a href="/projects">Projects</a>
       <a href="#contact">Contact</a>
     </nav>
   </header>
@@ -270,7 +285,15 @@
         <span class="row-year">Jun – Aug 2026</span>
         <div class="row-body">
           <h3>Summer Intern</h3>
-          <div class="place">Kongsberg Discovery · Horten</div>
+          <div class="place">
+            <img
+              src="https://logo.clearbit.com/kongsberg.com"
+              alt=""
+              class="org-logo"
+              onerror="this.style.display='none'"
+            />
+            Kongsberg Discovery · Horten
+          </div>
           <p>Coastal Monitoring project.</p>
         </div>
       </div>
@@ -279,7 +302,15 @@
         <span class="row-year">Aug 2025 – Present</span>
         <div class="row-body">
           <h3>Student Assistant</h3>
-          <div class="place">University of Bergen · Bergen</div>
+          <div class="place">
+            <img
+              src="https://logo.clearbit.com/uib.no"
+              alt=""
+              class="org-logo"
+              onerror="this.style.display='none'"
+            />
+            University of Bergen · Bergen
+          </div>
           <p>Assisted students with programming assignments, problem-solving, and debugging. Supported lecturers during lab sessions.</p>
         </div>
       </div>
@@ -288,7 +319,15 @@
         <span class="row-year">Jun – Aug 2025</span>
         <div class="row-body">
           <h3>Summer Intern</h3>
-          <div class="place">Kongsberg Discovery · Horten</div>
+          <div class="place">
+            <img
+              src="https://logo.clearbit.com/kongsberg.com"
+              alt=""
+              class="org-logo"
+              onerror="this.style.display='none'"
+            />
+            Kongsberg Discovery · Horten
+          </div>
           <p>Manufacturing and assembly operator.</p>
         </div>
       </div>
@@ -297,7 +336,15 @@
         <span class="row-year">Apr 2021 – Jun 2025</span>
         <div class="row-body">
           <h3>Grocery Stocker</h3>
-          <div class="place">Meny Tolvsrød · Tønsberg</div>
+          <div class="place">
+            <img
+              src="https://logo.clearbit.com/meny.no"
+              alt=""
+              class="org-logo"
+              onerror="this.style.display='none'"
+            />
+            Meny Tolvsrød · Tønsberg
+          </div>
           <p>Store management, goods delivery, e-commerce, customer service, and stocking. Held during high school and a gap year.</p>
         </div>
       </div>
@@ -306,7 +353,11 @@
         <span class="row-year">Apr 2023 – Apr 2024</span>
         <div class="row-body">
           <h3>Mandatory Military Service</h3>
-          <div class="place">Norwegian Navy · Bergen</div>
+          <div class="place">
+            <!-- Norwegian Navy — no Clearbit logo; using a subtle anchor emoji as fallback -->
+            <span style="font-size:13px; opacity:0.5; line-height:1;">⚓</span>
+            Norwegian Navy · Bergen
+          </div>
           <p>Fire protection soldier at Haakonsvern. Smoke diver and medical assistance.</p>
         </div>
       </div>
@@ -324,10 +375,19 @@
         <span class="row-year">2024 – 2027</span>
         <div class="row-body">
           <h3>B.Sc. Informatics: Computer Science</h3>
-          <div class="place">University of Bergen</div>
+          <div class="place">
+            <img
+              src="https://logo.clearbit.com/uib.no"
+              alt=""
+              class="org-logo"
+              onerror="this.style.display='none'"
+            />
+            University of Bergen
+          </div>
         </div>
       </div>
-      
+
+    </div>
   </section>
 
   <hr class="divider" />
@@ -354,7 +414,7 @@
 
   <section class="fade">
     <div class="section-title">Projects</div>
-    <a href="projects.html" class="projects-teaser">
+    <a href="/projects" class="projects-teaser">
       <div class="projects-teaser-left">
         <span class="projects-teaser-title">Selected work</span>
         <span class="projects-teaser-sub">Tower defense, bike-share explorer, Wordle solver & more</span>
