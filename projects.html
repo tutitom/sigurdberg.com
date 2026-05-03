@@ -13,12 +13,16 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg:     #f9f8f6;
-      --text:   #1a1a1a;
-      --muted:  #999;
-      --light:  #e2dfd8;
-      --serif:  'Lora', Georgia, serif;
-      --sans:   'DM Sans', sans-serif;
+      --bg:       #f7f5f0;
+      --surface:  #faf9f6;
+      --text:     #1a1814;
+      --muted:    #a09890;
+      --light:    #e4dfd5;
+      --accent:   #c5713a;
+      --accent2:  #5b7fa6;
+      --warm:     #e8e0d0;
+      --serif:    'Lora', Georgia, serif;
+      --sans:     'DM Sans', sans-serif;
     }
 
     html { scroll-behavior: smooth; }
@@ -31,6 +35,7 @@
       font-size: 15px;
       line-height: 1.75;
       -webkit-font-smoothing: antialiased;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.022'/%3E%3C/svg%3E");
     }
 
     .wrap {
@@ -39,11 +44,32 @@
       padding: 0 2rem;
     }
 
+    /* ── Ambient orb ── */
+    .orb {
+      position: fixed;
+      top: -180px;
+      right: -120px;
+      width: 520px;
+      height: 520px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 40% 40%, rgba(197,113,58,0.09) 0%, rgba(91,127,166,0.05) 60%, transparent 80%);
+      pointer-events: none;
+      z-index: 0;
+      animation: orbDrift 18s ease-in-out infinite alternate;
+    }
+
+    @keyframes orbDrift {
+      from { transform: translate(0, 0) scale(1); }
+      to   { transform: translate(-30px, 40px) scale(1.08); }
+    }
+
     /* ── Header ── */
     header {
+      position: relative;
+      z-index: 1;
       padding: 5rem 0 3.5rem;
       opacity: 0;
-      animation: appear 0.5s ease forwards 0.05s;
+      animation: appear 0.6s ease forwards 0.05s;
     }
 
     .back {
@@ -54,16 +80,20 @@
       color: var(--muted);
       text-decoration: none;
       margin-bottom: 2.5rem;
-      transition: color 0.15s;
+      transition: color 0.2s, transform 0.2s;
     }
-    .back:hover { color: var(--text); }
+    .back:hover { color: var(--accent); transform: translateX(-3px); }
 
     .page-title {
       font-family: var(--serif);
-      font-size: 1.5rem;
+      font-size: 1.6rem;
       font-weight: 400;
-      letter-spacing: -0.01em;
+      letter-spacing: -0.015em;
       margin-bottom: 0.3rem;
+      background: linear-gradient(135deg, var(--text) 50%, var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
 
     .page-sub {
@@ -76,27 +106,59 @@
       border: none;
       border-top: 1px solid var(--light);
       margin: 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ── Section title ── */
+    .section-label {
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin: 2.5rem 0 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      position: relative;
+      z-index: 1;
+    }
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(to right, var(--light), transparent);
     }
 
     /* ── Project list ── */
-    .projects { display: flex; flex-direction: column; margin: 3rem 0; gap: 0; }
+    .projects {
+      display: flex;
+      flex-direction: column;
+      margin: 0 0 3rem;
+      gap: 0;
+      position: relative;
+      z-index: 1;
+    }
 
     .project {
       display: flex;
       align-items: flex-start;
       justify-content: space-between;
       gap: 2rem;
-      padding: 2rem 0;
+      padding: 2rem 1rem;
       border-bottom: 1px solid var(--light);
       text-decoration: none;
       color: var(--text);
-      transition: opacity 0.15s;
+      border-radius: 4px;
+      transition: background 0.2s, color 0.2s, transform 0.2s;
+      cursor: pointer;
     }
     .project:first-child { border-top: 1px solid var(--light); }
-    .project:hover { opacity: 0.6; }
-
-    .project.no-link { cursor: default; }
-    .project.no-link:hover { opacity: 1; }
+    .project:hover {
+      background: var(--warm);
+      transform: translateX(4px);
+    }
+    .project:hover .project-arrow { transform: translateX(3px); color: var(--accent); }
 
     .project-left { flex: 1; }
 
@@ -110,8 +172,16 @@
 
     .project-desc {
       font-size: 13px;
-      color: #555;
+      color: #605850;
       margin-bottom: 0.55rem;
+    }
+
+    .project-meta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.4rem;
+      margin-bottom: 0.4rem;
     }
 
     .project-stack {
@@ -120,11 +190,26 @@
       letter-spacing: 0.04em;
     }
 
+    .stack-tag {
+      display: inline-block;
+      font-size: 10px;
+      color: var(--accent2);
+      background: rgba(91,127,166,0.08);
+      border: 1px solid rgba(91,127,166,0.18);
+      border-radius: 3px;
+      padding: 0.05rem 0.45rem;
+      letter-spacing: 0.03em;
+      transition: background 0.2s;
+    }
+
+    .project:hover .stack-tag { background: rgba(91,127,166,0.14); }
+
     .project-arrow {
       font-size: 13px;
       color: var(--muted);
       flex-shrink: 0;
       padding-top: 0.15rem;
+      transition: transform 0.25s ease, color 0.2s;
     }
 
     /* ── Winner badge ── */
@@ -143,6 +228,30 @@
       margin-bottom: 0.5rem;
       font-family: var(--sans);
       font-weight: 400;
+      animation: badgePulse 3s ease-in-out infinite;
+    }
+
+    @keyframes badgePulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(197,163,58,0); }
+      50%       { box-shadow: 0 0 0 4px rgba(197,163,58,0.12); }
+    }
+
+    /* ── Group badge ── */
+    .group-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-size: 10px;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: #3a5f8a;
+      background: rgba(91,127,166,0.08);
+      border: 1px solid rgba(91,127,166,0.25);
+      border-radius: 3px;
+      padding: 0.15rem 0.5rem;
+      margin-bottom: 0.5rem;
+      font-family: var(--sans);
+      font-weight: 400;
     }
 
     /* ── Modal ── */
@@ -150,9 +259,9 @@
       display: none;
       position: fixed;
       inset: 0;
-      background: rgba(20, 18, 14, 0.75);
-      backdrop-filter: blur(5px);
-      -webkit-backdrop-filter: blur(5px);
+      background: rgba(20, 18, 14, 0.8);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
       z-index: 100;
       align-items: center;
       justify-content: center;
@@ -160,17 +269,18 @@
     }
     .modal-overlay.open {
       display: flex;
-      animation: fadeOverlay 0.2s ease forwards;
+      animation: fadeOverlay 0.25s ease forwards;
     }
 
     .modal {
-      background: var(--bg);
-      border-radius: 6px;
+      background: var(--surface);
+      border-radius: 8px;
       width: 100%;
       max-width: 900px;
-      box-shadow: 0 32px 80px rgba(0,0,0,0.35);
+      box-shadow: 0 40px 100px rgba(0,0,0,0.4);
       overflow: hidden;
-      animation: slideUp 0.25s ease forwards;
+      animation: slideUp 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      border: 1px solid var(--light);
     }
 
     .modal-header {
@@ -198,7 +308,7 @@
       border-radius: 3px;
       transition: color 0.15s, background 0.15s;
     }
-    .modal-close:hover { color: var(--text); background: var(--light); }
+    .modal-close:hover { color: var(--text); background: var(--warm); }
 
     .modal-embed {
       position: relative;
@@ -222,11 +332,13 @@
       color: var(--muted);
       display: flex;
       justify-content: space-between;
+      position: relative;
+      z-index: 1;
     }
 
     /* ── Animations ── */
     @keyframes appear {
-      from { opacity: 0; transform: translateY(8px); }
+      from { opacity: 0; transform: translateY(10px); }
       to   { opacity: 1; transform: translateY(0); }
     }
 
@@ -236,16 +348,25 @@
     }
 
     @keyframes slideUp {
-      from { opacity: 0; transform: translateY(20px); }
+      from { opacity: 0; transform: translateY(24px); }
       to   { opacity: 1; transform: translateY(0); }
     }
 
     .fade {
       opacity: 0;
-      transform: translateY(8px);
-      transition: opacity 0.5s ease, transform 0.5s ease;
+      transform: translateY(12px);
+      transition: opacity 0.55s ease, transform 0.55s ease;
     }
     .fade.in { opacity: 1; transform: none; }
+
+    .project {
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.45s ease, transform 0.45s ease, background 0.2s, color 0.2s;
+    }
+    .projects-visible .project { opacity: 1; transform: translateY(0); }
+    .projects-visible .project:nth-child(1) { transition-delay: 0.07s; }
+    .projects-visible .project:nth-child(2) { transition-delay: 0.16s; }
 
     @media (max-width: 500px) {
       footer { flex-direction: column; gap: 0.25rem; }
@@ -254,6 +375,7 @@
   </style>
 </head>
 <body>
+<div class="orb"></div>
 <div class="wrap">
 
   <header>
@@ -264,10 +386,12 @@
 
   <hr class="divider" />
 
-  <div class="projects fade">
+  <div class="section-label">Selected work</div>
+
+  <div class="projects" id="projects-list">
 
     <!-- Bekk: Labyriten -->
-    <div class="project" style="cursor:pointer;" onclick="openModal()">
+    <div class="project" onclick="openModal()">
       <div class="project-left">
         <div class="winner-badge">🏆 Winner</div>
         <div class="project-title">Bekk: Labyriten Finale 2026</div>
@@ -275,55 +399,32 @@
           A student competition where the task was to design a concept for increasing
           interactions between users and the feed in the VG X app.
         </p>
-        <div class="project-stack">Concept Design · UX · Product Strategy</div>
+        <div class="project-meta">
+          <span class="stack-tag">Concept Design</span>
+          <span class="stack-tag">UX</span>
+          <span class="stack-tag">Product Strategy</span>
+        </div>
       </div>
       <span class="project-arrow">↗</span>
     </div>
 
-    <a href="https://github.com/yourusername/tower-defense" class="project" target="_blank" rel="noopener">
+    <!-- Tower Defense -->
+    <a href="https://git.app.uib.no/inf112/26v/proj/limited-game" class="project" target="_blank" rel="noopener">
       <div class="project-left">
+        <div class="group-badge">👥 Group Project · INF112: Systems Development</div>
         <div class="project-title">Tower Defense Game</div>
         <p class="project-desc">
-          A Java game built with LibGDX for INF112. Features a card-based upgrade system,
-          enemy waves, projectile physics, and JSON-driven configuration.
+          A Java game built with LibGDX for INF112: Systems Development. Features a
+          card-based upgrade system, enemy waves, projectile physics, and JSON-driven
+          configuration. Developed collaboratively using agile practices and GitLab CI/CD.
         </p>
-        <div class="project-stack">Java · LibGDX · JUnit 5 · Gson · Gradle</div>
-      </div>
-      <span class="project-arrow">↗</span>
-    </a>
-
-    <a href="https://github.com/yourusername/bike-share" class="project" target="_blank" rel="noopener">
-      <div class="project-left">
-        <div class="project-title">Bike-Share Data Explorer</div>
-        <p class="project-desc">
-          Python Shiny web app connected to a SQLite bike-sharing database,
-          with reactive queries and interactive visualisations.
-        </p>
-        <div class="project-stack">Python · Shiny · SQLite · SQL</div>
-      </div>
-      <span class="project-arrow">↗</span>
-    </a>
-
-    <a href="https://github.com/yourusername/wordle-solver" class="project" target="_blank" rel="noopener">
-      <div class="project-left">
-        <div class="project-title">Wordle AI Solver</div>
-        <p class="project-desc">
-          Entropy-based solver for INF102. Picks the optimal guess at each step
-          using information theory to minimise remaining candidates.
-        </p>
-        <div class="project-stack">Python · Algorithms · Information Theory</div>
-      </div>
-      <span class="project-arrow">↗</span>
-    </a>
-
-    <a href="https://github.com/yourusername/zerow" class="project" target="_blank" rel="noopener">
-      <div class="project-left">
-        <div class="project-title">Zerow Language</div>
-        <p class="project-desc">
-          A custom programming language for INF222 — grammar, semantic validation,
-          and a WebAssembly code generator, all in TypeScript with Langium.
-        </p>
-        <div class="project-stack">TypeScript · Langium · WebAssembly</div>
+        <div class="project-meta">
+          <span class="stack-tag">Java</span>
+          <span class="stack-tag">LibGDX</span>
+          <span class="stack-tag">JUnit 5</span>
+          <span class="stack-tag">Gradle</span>
+          <span class="stack-tag">GitLab CI</span>
+        </div>
       </div>
       <span class="project-arrow">↗</span>
     </a>
@@ -385,8 +486,19 @@
     entries.forEach(e => {
       if (e.isIntersecting) { e.target.classList.add('in'); observer.unobserve(e.target); }
     });
-  }, { threshold: 0.08 });
+  }, { threshold: 0.06 });
   document.querySelectorAll('.fade').forEach(el => observer.observe(el));
+
+  // Staggered project reveal
+  const projectsObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('projects-visible');
+        projectsObs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.05 });
+  projectsObs.observe(document.getElementById('projects-list'));
 </script>
 </body>
 </html>
